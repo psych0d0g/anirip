@@ -148,9 +148,9 @@ func download(showURL, user, pass, quality, subLang string) {
 			}
 
 			// Moves the episode to the appropriate season sub-directory
-			if err := common.Rename(tempDir+string(os.PathSeparator)+"episode.mkv",
+			if err := common.Rename(tempDir+string(os.PathSeparator)+"episode.mp4",
 				show.GetTitle()+string(os.PathSeparator)+seasonMap[season.GetNumber()]+
-					string(os.PathSeparator)+episode.GetFilename()+".mkv", 10); err != nil {
+					string(os.PathSeparator)+episode.GetFilename()+".mp4", 10); err != nil {
 				log.Error(err)
 			}
 			log.Success("Downloading and merging completed successfully!")
