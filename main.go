@@ -15,17 +15,17 @@ import (
 var (
 	tempDir   = os.TempDir() + string(os.PathSeparator) + "anirip"
 	seasonMap = map[int]string{
-		0:  "Specials",
-		1:  "Season One",
-		2:  "Season Two",
-		3:  "Season Three",
-		4:  "Season Four",
-		5:  "Season Five",
-		6:  "Season Six",
-		7:  "Season Seven",
-		8:  "Season Eight",
-		9:  "Season Nine",
-		10: "Season Ten",
+		0:  "S00",
+		1:  "S01",
+		2:  "S02",
+		3:  "S03",
+		4:  "S04",
+		5:  "S05",
+		6:  "S06",
+		7:  "S07",
+		8:  "S08",
+		9:  "S09",
+		10: "S10",
 	}
 )
 
@@ -117,9 +117,9 @@ func download(showURL, user, pass, quality, subLang string) {
 
 			// Checks to see if the episode already exists, in which case we continue to the next
 			_, err = os.Stat(show.GetTitle() + string(os.PathSeparator) + seasonMap[season.GetNumber()] +
-				string(os.PathSeparator) + episode.GetFilename() + ".mkv")
+				string(os.PathSeparator) + episode.GetFilename() + ".mp4")
 			if err == nil {
-				log.Success("%s.mkv has already been downloaded successfully!", episode.GetFilename())
+				log.Success("%s.mp4 has already been downloaded successfully!", episode.GetFilename())
 				continue
 			}
 
