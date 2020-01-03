@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/urfave/cli"
-	"s32x.com/anirip/common"
-	"s32x.com/anirip/common/log"
+	"github.com/psych0d0g/anirip/common"
+	"github.com/psych0d0g/anirip/common/log"
 	"github.com/psych0d0g/anirip/crunchyroll"
 )
 
