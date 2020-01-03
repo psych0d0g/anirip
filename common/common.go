@@ -3,6 +3,7 @@ package common /* import "github.com/psych0d0g/anirip/common" */
 import (
 	"fmt"
 	"os"
+	"util"
 	"strings"
 )
 
@@ -16,7 +17,7 @@ func Delete(a ...string) error { return os.Remove(strings.Join(a, pathSep)) }
 // Rename renames the source to the desired destination file name and
 // recursively retries i times if there are any issues
 func Rename(src, dst string, i int) error {
-	if err := os.Rename(src, dst); err != nil {
+	if err := util.RenameFile(src, dst, false); err != nil {
 		if i > 0 {
 			return Rename(src, dst, i-1)
 		}
