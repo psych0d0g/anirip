@@ -9,7 +9,7 @@ import (
 	"strings"
 	"regexp"
 
-	"s32x.com/anirip/common"
+	"github.com/psych0d0g/anirip/common"
 )
 
 // Note from turtle: I haven't found a good use for the streams yet but I'll keep looking into it
