@@ -42,12 +42,12 @@ func main() {
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:  "language, l",
-			Value: "en-US",
+			Value: "de-DE",
 			Usage: "language code for the subtitles (not all are supported) ex: en-US, ja-JP",
 		},
 		cli.StringFlag{
 			Name:  "quality, q",
-			Value: "720",
+			Value: "1080",
 			Usage: "quality of video to download ex: 1080, 720, 480, 360, android",
 		},
 	}
@@ -141,7 +141,7 @@ func download(showURL, user, pass, quality, subLang string) {
 			}
 
 			// Attempts to merge the downloaded subtitles into the video stream
-			log.Info("Merging subtitles into MKV container...")
+			log.Info("Merging subtitles into MP4 container...")
 			if err := vp.MergeSubtitles("jpn", subLang); err != nil {
 				log.Error(err)
 				continue
