@@ -51,7 +51,6 @@ func (p *VideoProcessor) MergeSubtitles(audioLang, subtitleLang string) error {
 			"-c:v", "copy",
 			"-c:a", "copy",
 			"-metadata:s:a:0", "language="+audioLang,
-			"-movflags", "+faststart",
 			"-y", "episode.mkv")
 	} else {
 		cmd = exec.Command(
@@ -64,7 +63,6 @@ func (p *VideoProcessor) MergeSubtitles(audioLang, subtitleLang string) error {
 			"-metadata:s:a:0", "language="+audioLang,
 			"-metadata:s:s:0", "language="+subtitleLang,
 			"-disposition:s:0", "default",
-			"-movflags", "+faststart",
 			"-y", "episode.mkv")
 	}
 	cmd.Dir = p.tempDir
