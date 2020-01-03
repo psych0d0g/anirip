@@ -116,7 +116,7 @@ func (e *Episode) GetEpisodeInfo(client *common.HTTPClient, quality string) erro
 	}
 
 	e.Title = strings.Replace(strings.Replace(doc.Find("#showmedia_about_name").First().Text(), "“", "", -1), "”", "", -1)
-	e.Filename = strings.Replace(common.CleanFilename(e.Filename + e.Title + "." + e.Quality + ".WEBRip.GERSUB-iND), " ", ".", -1)
+	e.Filename = strings.Replace(common.CleanFilename(e.Filename + e.Title + "." + e.Quality + ".WEBRip.GERSUB-iND"), " ", ".", -1)
 	e.StreamURL = strings.Replace(eFile, "amp;", "", -1)
 	return nil
 }
