@@ -1,4 +1,4 @@
-module s32x.com/anirip
+module github.com/psych0d0g/anirip
 
 go 1.13
 
