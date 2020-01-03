@@ -1,4 +1,4 @@
-package main /* import "s32x.com/anirip" */
+package main /* import "github.com/psych0d0g/anirip" */
 
 import (
 	"fmt"
