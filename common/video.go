@@ -1,4 +1,4 @@
-package common /* import "s32x.com/anirip/common" */
+package common /* import "github.com/psych0d0g/anirip/common" */
 
 import (
 	"fmt"
@@ -23,7 +23,7 @@ func (p *VideoProcessor) DumpHLS(url string) error {
 	cmd := exec.Command(
 		findAbsoluteBinary("ffmpeg"),
 		"-i", url,
-		"-c", "copy", "incomplete.episode.mkv")
+		"-c", "copy", "incomplete.episode.mp4")
 	cmd.Dir = p.tempDir
 	if err := cmd.Run(); err != nil {
 		return fmt.Errorf("running download command: %w", err)
@@ -31,7 +31,7 @@ func (p *VideoProcessor) DumpHLS(url string) error {
 
 	// Rename the file since it's no longer incomplete
 	// and return
-	if err := Rename(p.tempDir+pathSep+"incomplete.episode.mkv",p.tempDir+pathSep+"episode.mkv", 10); err != nil {
+	if err := Rename(p.tempDir+pathSep+"incomplete.episode.mp4",p.tempDir+pathSep+"episode.mp4", 10); err != nil {
 		return fmt.Errorf("renaming incomplete episode: %w", err)
 	}
 	return nil
@@ -39,23 +39,24 @@ func (p *VideoProcessor) DumpHLS(url string) error {
 
 // MergeSubtitles merges the VIDEO.mkv and the VIDEO.ass
 func (p *VideoProcessor) MergeSubtitles(audioLang, subtitleLang string) error {
-	Delete(p.tempDir, "unmerged.episode.mkv")
-	if err := Rename(p.tempDir+pathSep+"episode.mkv", p.tempDir+pathSep+"unmerged.episode.mkv", 10); err != nil {
+	Delete(p.tempDir, "unmerged.episode.mp4")
+	if err := Rename(p.tempDir+pathSep+"episode.mp4", p.tempDir+pathSep+"unmerged.episode.mp4", 10); err != nil {
 		return fmt.Errorf("renaming unmerged episode: %w", err)
 	}
 	cmd := new(exec.Cmd)
 	if subtitleLang == "" {
 		cmd = exec.Command(
 			findAbsoluteBinary("ffmpeg"),
-			"-i", "unmerged.episode.mkv",
+			"-i", "unmerged.episode.mp4",
 			"-c:v", "copy",
 			"-c:a", "copy",
 			"-metadata:s:a:0", "language="+audioLang,
-			"-y", "episode.mkv")
+			"-movflags", "+faststart",
+			"-y", "episode.mp4")
 	} else {
 		cmd = exec.Command(
 			findAbsoluteBinary("ffmpeg"),
-			"-i", "unmerged.episode.mkv",
+			"-i", "unmerged.episode.mp4",
 			"-f", "ass",
 			"-i", "subtitles.episode.ass",
 			"-c:v", "copy",
@@ -63,14 +64,15 @@ func (p *VideoProcessor) MergeSubtitles(audioLang, subtitleLang string) error {
 			"-metadata:s:a:0", "language="+audioLang,
 			"-metadata:s:s:0", "language="+subtitleLang,
 			"-disposition:s:0", "default",
-			"-y", "episode.mkv")
+			"-movflags", "+faststart",
+			"-y", "episode.mp4")
 	}
 	cmd.Dir = p.tempDir
 	if err := cmd.Run(); err != nil {
 		return fmt.Errorf("running download command: %w", err)
 	}
 	Delete(p.tempDir, "subtitles.episode.ass")
-	Delete(p.tempDir, "unmerged.episode.mkv")
+	Delete(p.tempDir, "unmerged.episode.mp4")
 	return nil
 }
 
