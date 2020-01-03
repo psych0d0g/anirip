@@ -117,7 +117,7 @@ func download(showURL, user, pass, quality, subLang string) {
 
 			// Checks to see if the episode already exists, in which case we continue to the next
 			_, err = os.Stat(show.GetTitle() + string(os.PathSeparator) + seasonMap[season.GetNumber()] +
-				string(os.PathSeparator) + episode.GetFilename() + ".mp4")
+				string(os.PathSeparator) + episode.GetFilename() + ".mkv")
 			if err == nil {
 				log.Success("%s.mp4 has already been downloaded successfully!", episode.GetFilename())
 				continue
@@ -148,9 +148,9 @@ func download(showURL, user, pass, quality, subLang string) {
 			}
 
 			// Moves the episode to the appropriate season sub-directory
-			if err := common.Rename(tempDir+string(os.PathSeparator)+"episode.mp4",
+			if err := common.Rename(tempDir+string(os.PathSeparator)+"episode.mkv",
 				show.GetTitle()+string(os.PathSeparator)+seasonMap[season.GetNumber()]+
-					string(os.PathSeparator)+episode.GetFilename()+".mp4", 10); err != nil {
+					string(os.PathSeparator)+episode.GetFilename()+".mkv", 10); err != nil {
 				log.Error(err)
 			}
 			log.Success("Downloading and merging completed successfully!")
