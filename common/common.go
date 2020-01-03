@@ -3,7 +3,7 @@ package common /* import "github.com/psych0d0g/anirip/common" */
 import (
 	"fmt"
 	"os"
-	"util"
+	"ioutil"
 	"strings"
 )
 
@@ -16,14 +16,27 @@ func Delete(a ...string) error { return os.Remove(strings.Join(a, pathSep)) }
 
 // Rename renames the source to the desired destination file name and
 // recursively retries i times if there are any issues
-func Rename(src, dst string, i int) error {
-	if err := util.RenameFile(src, dst, false); err != nil {
-		if i > 0 {
-			return Rename(src, dst, i-1)
-		}
-		return err
-	}
-	return nil
+ func customRename(prevPath, newPath string, mode os.FileMode) error {
+     err := os.Rename(prevPath, newPath)
+     if err != nil {
+         byteArr, err2 := ioutil.ReadFile(prevPath)
+              if err2 != nil {
+                        return err2
+             }
+
+                err2 = ioutil.WriteFile(newPath, byteArr, mode)
+         if err2 == nil {
+                        // Remove the file iff it was able to be written
+                        _ = os.Remove(prevPath)
+         } else {
+                        log.Printf("unable to write the file out to the new path. Previous: %s --> New: %s\n", prevPath, newPath)
+                       // Remove any partial file data that may have been written in the case of unfulfilled writes.
+                   _ = os.Remove(newPath)
+          }
+
+                return err2
+     }
+       return err
 }
 
 // GenerateEpisodeFilename constructs an episode filename and returns the
