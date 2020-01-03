@@ -1,4 +1,4 @@
-package crunchyroll /* import "s32x.com/anirip/crunchyroll" */
+package crunchyroll /* import "github.com/psych0d0g/anirip/crunchyroll" */
 
 import (
 	"bytes"
@@ -72,6 +72,7 @@ func validateSession(c *common.HTTPClient) error {
 	}
 
 	doc, err := goquery.NewDocumentFromResponse(resp)
+	return doc
 	if err != nil {
 		return fmt.Errorf("generating validation document: %w", err)
 	}
