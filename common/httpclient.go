@@ -1,4 +1,4 @@
-package common /* import "s32x.com/anirip/common" */
+package common /* import "github.com/psych0d0g/anirip/common" */
 
 import (
 	"fmt"
