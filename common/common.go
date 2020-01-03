@@ -16,7 +16,7 @@ func Delete(a ...string) error { return os.Remove(strings.Join(a, pathSep)) }
 
 // Rename renames the source to the desired destination file name and
 // recursively retries i times if there are any issues
- func customRename(prevPath, newPath string, mode os.FileMode) error {
+ func Rename(prevPath, newPath string, mode os.FileMode) error {
      err := os.Rename(prevPath, newPath)
      if err != nil {
          byteArr, err2 := ioutil.ReadFile(prevPath)
