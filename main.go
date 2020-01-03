@@ -9,7 +9,7 @@ import (
 	"github.com/urfave/cli"
 	"s32x.com/anirip/common"
 	"s32x.com/anirip/common/log"
-	"s32x.com/anirip/crunchyroll"
+	"github.com/psych0d0g/anirip/crunchyroll"
 )
 
 var (
