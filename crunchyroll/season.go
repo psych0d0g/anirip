@@ -1,4 +1,4 @@
-package crunchyroll /* import "s32x.com/anirip/crunchyroll" */
+package crunchyroll /* import "github.com/psych0d0g/anirip/crunchyroll" */
 
 import "s32x.com/anirip/common"
 
