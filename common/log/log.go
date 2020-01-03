@@ -1,4 +1,4 @@
-package log /* import "s32x.com/anirip/common/log" */
+package common /* import "github.com/psych0d0g/anirip/common/log" */
 
 import "github.com/fatih/color"
 
