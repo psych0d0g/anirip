@@ -15,7 +15,7 @@ import (
 // Login logs the user in to Crunchyroll and stores the session on the client
 func Login(c *common.HTTPClient, user, pass string) error {
 	// Perform preflight request to retrieve the login page
-	res, err := c.Get("https://www.crunchyroll.com/login", nil)
+	res, err := c.Get("https://www.crunchyroll.com/de/login", nil)
 	if err != nil {
 		return fmt.Errorf("getting login page: %w", err)
 	}
@@ -55,9 +55,9 @@ func createSession(c *common.HTTPClient, user, pass, token string) error {
 
 	// Execute the post request on the formhandler and store cookies in the jar
 	head := http.Header{}
-	head.Add("Referer", "https://www.crunchyroll.com/login")
+	head.Add("Referer", "https://www.crunchyroll.com/de/login")
 	head.Add("Content-Type", "application/x-www-form-urlencoded")
-	if _, err := c.Post("https://www.crunchyroll.com/login", head, body); err != nil {
+	if _, err := c.Post("https://www.crunchyroll.com/de/login", head, body); err != nil {
 		return fmt.Errorf("posting auth request: %w", err)
 	}
 	return nil
@@ -66,7 +66,7 @@ func createSession(c *common.HTTPClient, user, pass, token string) error {
 // validateSession performs a get request on crunchyrolls homepage and checks
 // to be sure a non-empty username is found
 func validateSession(c *common.HTTPClient) error {
-	resp, err := c.Get("http://www.crunchyroll.com/", nil)
+	resp, err := c.Get("http://www.crunchyroll.com/de/", nil)
 	if err != nil {
 		return fmt.Errorf("getting validation page: %w", err)
 	}
