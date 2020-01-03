@@ -3,7 +3,7 @@ package common /* import "github.com/psych0d0g/anirip/common" */
 import (
 	"fmt"
 	"os"
-	"io"
+	"io/util"
 	"strings"
 )
 
