@@ -72,7 +72,7 @@ func validateSession(c *common.HTTPClient) error {
 	}
 
 	doc, err := goquery.NewDocumentFromResponse(resp)
-	return doc
+	log.Info(doc)
 	if err != nil {
 		return fmt.Errorf("generating validation document: %w", err)
 	}
