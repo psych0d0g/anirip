@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"s32x.com/anirip/common"
-	"s32x.com/anirip/common/log"
+	"github.com/psych0d0g/anirip/common"
+	"github.com/psych0d0g/anirip/common/log"
 )
 
 // Login logs the user in to Crunchyroll and stores the session on the client
