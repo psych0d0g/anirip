@@ -29,7 +29,7 @@ func Delete(a ...string) error { return os.Remove(strings.Join(a, pathSep)) }
                         // Remove the file iff it was able to be written
                         _ = os.Remove(prevPath)
          } else {
-                        log.Printf("unable to write the file out to the new path. Previous: %s --> New: %s\n", prevPath, newPath)
+                        return fmt.Errorf("unable to write the file out to the new path. Previous: %s --> New: %s\n", prevPath, newPath)
                        // Remove any partial file data that may have been written in the case of unfulfilled writes.
                    _ = os.Remove(newPath)
           }
