@@ -51,7 +51,7 @@ func (s *Show) Scrape(client *common.HTTPClient, showURL string) error {
 			episodeList.Find("div.wrapper.container-shadow.hover-classes").Each(func(i3 int, episode *goquery.Selection) {
 				// Appends all new episode information to newly appended season
 				episodeTitle := strings.TrimSpace(strings.Replace(episode.Find("span.series-title.block.ellipsis").First().Text(), "\n", "", 1))
-				episodeNumber, _ := strconv.ParseFloat(strings.Replace(episodeTitle, "Episode ", "", 1), 64)
+				episodeNumber, _ := strconv.ParseFloat(strings.Replace(episodeTitle, "Folge ", "", 1), 64)
 				episodePath, _ := episode.Find("a").First().Attr("href")
 				episodeID, _ := strconv.Atoi(episodePath[len(episodePath)-6:])
 				s.Seasons[i2].Episodes = append(s.Seasons[i2].Episodes, Episode{
